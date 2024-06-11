@@ -30,7 +30,7 @@ public class P01_LoginPage {
     }
 
 
-    public boolean assertLogin(String expectUrl) {
+    public boolean assertLoginURL(String expectUrl) {
         return driver.getCurrentUrl().equals(expectUrl);
     }
 }

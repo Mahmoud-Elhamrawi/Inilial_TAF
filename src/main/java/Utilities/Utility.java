@@ -46,7 +46,7 @@ public class Utility {
     }
 
     //TODO:general wait
-    public static void generalWait(WebDriver driver, By locator) {
+    public static void generalWait(WebDriver driver) {
         new WebDriverWait(driver, Duration.ofSeconds(5));
     }
 

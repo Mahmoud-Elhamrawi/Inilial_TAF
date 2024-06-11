@@ -5,7 +5,10 @@ import Utilities.Utility;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.Set;
 
@@ -16,6 +19,7 @@ public class P02_HomePage {
     private final By ProdBtn = By.xpath("//button[contains(@class,'btn_inventory')]");
     private final By iconCount = By.className("shopping_cart_badge");
     private final By prodSelected = By.xpath("//button[.=\"Remove\"]");
+    private final By cartIcon = By.className("shopping_cart_link");
 
     public P02_HomePage(WebDriver driver) {
         this.driver = driver;
@@ -30,6 +34,7 @@ public class P02_HomePage {
         for (int i = 1; i < allProdBtn.size(); i++) {
             By ProdBtn = By.xpath("(//button[contains(@class,'btn_inventory')])[" + i + "]");
             Utility.Clicking(driver, ProdBtn);
+            LogUtility.info("product select" + i);
         }
 
         return this;
@@ -60,6 +65,7 @@ public class P02_HomePage {
 
         Set<Integer> randomNumbers = Utility.generateUniqueNumbers(needProd, totalProd);
         for (int random : randomNumbers) {
+            LogUtility.info("randomProduct" + random);
             By ProdBtn = By.xpath("(//button[contains(@class,'btn_inventory')])[" + random + "]");
             Utility.Clicking(driver, ProdBtn);
         }
@@ -69,6 +75,23 @@ public class P02_HomePage {
 
     public boolean comparingProdSelectedWithCountOnCart() {
         return getCountOfProdOnCart().equals(getProdSelected());
+    }
+
+
+    public P03_cartPage clickingOnCartIcon() {
+
+        Utility.Clicking(driver, cartIcon);
+        return new P03_cartPage(driver);
+    }
+
+    public boolean verifyCartUrl(String expectUrl) {
+        try {
+            new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.urlToBe(expectUrl));
+            return true;
+        } catch (Exception e) {
+            LogUtility.error(e.getMessage());
+            return false;
+        }
     }
 
 }

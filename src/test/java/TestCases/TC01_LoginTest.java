@@ -40,7 +40,7 @@ public class TC01_LoginTest {
                 .enterPasswordName(PASSWORD)
                 .loginButton();
 
-        Assert.assertTrue(new P01_LoginPage(getDriver()).assertLogin(DataUtility.getDataFromFileProperty("dataEnv", "homeUrl")));
+        Assert.assertTrue(new P01_LoginPage(getDriver()).assertLoginURL(DataUtility.getDataFromFileProperty("dataEnv", "homeUrl")));
         LogUtility.info("TC pass");
 
     }

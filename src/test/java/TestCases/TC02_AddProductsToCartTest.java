@@ -51,6 +51,18 @@ public class TC02_AddProductsToCartTest {
 
     }
 
+    @Test
+    public void goTOCartPage() {
+        new P01_LoginPage(getDriver())
+                .enterUserName(DataUtility.getJsonData("userDataLogin", "userName"))
+                .enterPasswordName(DataUtility.getJsonData("userDataLogin", "Password"))
+                .loginButton()
+                .addProductsRandom(3, 6)
+                .clickingOnCartIcon();
+        Assert.assertTrue(new P02_HomePage(getDriver()).verifyCartUrl(DataUtility.getDataFromFileProperty("dataEnv", "cartUrl")));
+
+    }
+
 
     @AfterMethod
     public void rearDown() {
