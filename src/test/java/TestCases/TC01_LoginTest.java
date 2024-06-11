@@ -17,7 +17,7 @@ import static DriverFactory.DriverFactory.*;
 
 
 @Listeners({ITestResult.class, IInvokedListeners.class})
-public class TC01_ValidLoginTest {
+public class TC01_LoginTest {
 
     private final String USERNAME = DataUtility.getJsonData("userDataLogin", "userName");
     private final String PASSWORD = DataUtility.getJsonData("userDataLogin", "Password");

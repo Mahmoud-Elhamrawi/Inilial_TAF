@@ -15,9 +15,9 @@
 
         <seleniumVersion>4.21.0</seleniumVersion>
         <testNGVersion>7.10.2</testNGVersion>
-        <slf4j-apiVersion>2.0.13</slf4j-apiVersion>
-        <slf4j-simpleVersion>2.0.13</slf4j-simpleVersion>
-        <log4j-coreVersion>2.23.1</log4j-coreVersion>
+        <slf4jVersionApi>2.0.12</slf4jVersionApi>
+        <slf4jsimpleVersion>2.0.12</slf4jsimpleVersion>
+        <log4jcoreVersion>2.23.0</log4jcoreVersion>
         <gsonVersion>2.11.0</gsonVersion>
         <alluretestNGVersion>2.25.0</alluretestNGVersion>
         <javaFakerVersion>1.0.2</javaFakerVersion>
@@ -45,14 +45,14 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>${slf4j-apiVersion}</version>
+            <version>${slf4jVersionApi}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
-            <version>${slf4j-simpleVersion}</version>
+            <version>${slf4jsimpleVersion}</version>
             <scope>test</scope>
         </dependency>
 
@@ -60,7 +60,7 @@
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
-            <version>${log4j-coreVersion}</version>
+            <version>${log4jcoreVersion}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
