@@ -1,5 +1,6 @@
 package LIsteners;
 
+import Pages.P02_HomePage;
 import Utilities.LogUtility;
 import Utilities.Utility;
 import org.testng.IInvokedMethod;
@@ -19,6 +20,7 @@ public class IInvokedListeners implements IInvokedMethodListener {
         if (testResult.getStatus() == ITestResult.FAILURE) {
             LogUtility.info("TC" + testResult.getName() + "_" + "failure");
             Utility.takeScreenShot(getDriver(), testResult.getName());
+            Utility.takeFullScreenShot(getDriver(), new P02_HomePage(getDriver()).getIconCount());
         }
 
 

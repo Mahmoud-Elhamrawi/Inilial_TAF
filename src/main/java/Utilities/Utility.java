@@ -1,5 +1,7 @@
 package Utilities;
 
+import com.assertthat.selenium_shutterbug.core.Capture;
+import com.assertthat.selenium_shutterbug.core.Shutterbug;
 import io.qameta.allure.Allure;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
@@ -13,6 +15,9 @@ import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
 
 public class Utility {
     //TODO:take screen shots
@@ -60,6 +65,7 @@ public class Utility {
         return new SimpleDateFormat("yyyy-MM-dd-h-m-ssa").format(new Date());
     }
 
+    //TODO:take screen shot
     public static void takeScreenShot(WebDriver driver, String screenName) {
         try {
 
@@ -73,8 +79,38 @@ public class Utility {
     }
 
 
+    //TODO:take full screen shot
+    public static void takeFullScreenShot(WebDriver driver, By locator) {
+
+        try {
+            Shutterbug.shootPage(driver, Capture.FULL_SCROLL)
+                    .highlight(getTOWebElement(driver, locator))
+                    .save(screenshot_Path);
+        } catch (Exception e) {
+            LogUtility.error(e.getMessage());
+        }
+    }
+
     //TODO:select drop-down
     public static void selectFromDropDown(WebDriver driver, By locator, String option) {
         new Select(getTOWebElement(driver, locator)).selectByVisibleText(option);
     }
+
+
+    //TODO:generate random numbers
+    public static int generateRandomNumbers(int upper) {
+        return new Random().nextInt(upper) + 1;
+    }
+
+    public static Set<Integer> generateUniqueNumbers(int numNeed, int totalNum) {
+        Set<Integer> generateNumber = new HashSet<>();
+        while (generateNumber.size() < numNeed) {
+            int random = generateRandomNumbers(totalNum);
+            generateNumber.add(random);
+        }
+        return generateNumber;
+
+    }
+
+
 }
