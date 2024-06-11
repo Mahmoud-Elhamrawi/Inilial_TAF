@@ -40,7 +40,7 @@ public class Utility {
 
     //toDO:get text from element
     public static String getText(WebDriver driver, By locator) {
-        new WebDriverWait(driver, Duration.ofSeconds(5))
+        new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.visibilityOfElementLocated(locator));
         return driver.findElement(locator).getText();
     }

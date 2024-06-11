@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 public class P02_HomePage {
+    static float price = 0;
     private static List<WebElement> allProdBtn;
     private static List<WebElement> prodSelectedList;
     private final WebDriver driver;
@@ -20,6 +21,7 @@ public class P02_HomePage {
     private final By iconCount = By.className("shopping_cart_badge");
     private final By prodSelected = By.xpath("//button[.=\"Remove\"]");
     private final By cartIcon = By.className("shopping_cart_link");
+    private final By priceProdSelected = By.xpath("//button[.=\"Remove\"]//preceding-sibling::div[@class=\"inventory_item_price\"]");
 
     public P02_HomePage(WebDriver driver) {
         this.driver = driver;
@@ -60,7 +62,6 @@ public class P02_HomePage {
         }
     }
 
-
     public P02_HomePage addProductsRandom(int needProd, int totalProd) {
 
         Set<Integer> randomNumbers = Utility.generateUniqueNumbers(needProd, totalProd);
@@ -77,9 +78,7 @@ public class P02_HomePage {
         return getCountOfProdOnCart().equals(getProdSelected());
     }
 
-
     public P03_cartPage clickingOnCartIcon() {
-
         Utility.Clicking(driver, cartIcon);
         return new P03_cartPage(driver);
     }
@@ -93,5 +92,25 @@ public class P02_HomePage {
             return false;
         }
     }
+
+    public String getPricesOfProductSelected() {
+        try {
+            List<WebElement> pricesForProdSelect = driver.findElements(priceProdSelected);
+            for (int i = 1; i < pricesForProdSelect.size(); i++) {
+
+                By priceItem = By.xpath("(//button[.=\"Remove\"]//preceding-sibling::div[@class=\"inventory_item_price\"])[" + i + "]");
+                String fullStr = Utility.getText(driver, priceItem);
+                price += Float.parseFloat(fullStr.replace("$", ""));
+
+            }
+            LogUtility.info("total price on home page : " + price);
+            return String.valueOf(price);
+        } catch (Exception e) {
+            LogUtility.error(e.getMessage());
+            return "0";
+        }
+
+    }
+
 
 }
